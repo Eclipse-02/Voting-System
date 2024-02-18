@@ -27,11 +27,9 @@
     <main class="main-content position-relative border-radius-lg ">
         @include('layouts.sections.navbar')
         <div class="container-fluid py-4">
-            <div class="row mt-4">
-                <div class="col-lg-12 mb-lg-0 mb-4">
-                    <div class="card z-index-2 h-100">
-                        @yield('content')
-                    </div>
+            <div class="row">
+                <div class="col-12">
+                    @yield('content')
                 </div>
             </div>
         </div>
@@ -55,6 +53,10 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('master/assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
+    <!-- Sweetalert -->
+    @include('sweetalert::alert')
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/26f46bfed8.js" crossorigin="anonymous"></script>
     <!-- Scripts for this page -->
     @stack('scripts')
 </body>
