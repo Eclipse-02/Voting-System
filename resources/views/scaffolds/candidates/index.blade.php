@@ -26,7 +26,7 @@
                                 @foreach ($i->vision as $j)
                                     <div class="d-flex align-items-center py-2">
                                         <span class="bullet bg-primary me-3"></span>
-                                        @if ($j->count() > 1){{ ++$m }}.@endif {{ $j->desc }}
+                                        @if ($j->count() > 1) -@endif {{ $j->desc }}
                                     </div>
                                 @endforeach
                                 @if (count($i->vision) < 1)
@@ -42,7 +42,7 @@
                                 @foreach ($i->mission as $j)
                                     <div class="d-flex align-items-center py-2">
                                         <span class="bullet bg-primary me-3"></span>
-                                        @if ($j->count() > 1){{ ++$n }}.@endif {{ $j->desc }}
+                                        @if ($j->count() > 1) -@endif {{ $j->desc }}
                                     </div>
                                 @endforeach
                                 @if (count($i->mission) < 1)

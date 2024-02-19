@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\SelectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,11 @@ Auth::routes(['register' => false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'], function() {
+
+    // selections route
+    Route::get('/selections', [SelectionController::class, 'index'])->name('selections.index');
+    Route::get('/success', [SelectionController::class, 'success'])->name('selections.success');
+    Route::post('/store', [SelectionController::class, 'store'])->name('selections.store');
 
     Route::group(['prefix' => 'candidates'], function() {
 

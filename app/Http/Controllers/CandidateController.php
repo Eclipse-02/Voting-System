@@ -130,7 +130,7 @@ class CandidateController extends Controller
     public function vision($candidate)
     {
         $data = Candidate::where('id', $candidate)->first();
-        $visions = Vision::all();
+        $visions = Vision::where('candidate_id', $candidate)->get();
 
         return view('scaffolds.visions.index', compact('data', 'visions'));
     }
@@ -188,7 +188,7 @@ class CandidateController extends Controller
     public function mission($candidate)
     {
         $data = Candidate::where('id', $candidate)->first();
-        $missions = Mission::all();
+        $missions = Mission::where('candidate_id', $candidate)->get();
 
         return view('scaffolds.missions.index', compact('data', 'missions'));
     }

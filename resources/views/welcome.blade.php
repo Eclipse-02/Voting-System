@@ -7,66 +7,57 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('master/assets/img/apple-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('master/assets/img/favicon.png') }}">
     <title>
-        Welcome
+        Selamat Datang!
     </title>
-    <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Nucleo Icons -->
-    <link href="{{ asset('master/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('master/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="{{ asset('master/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('master/assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
+    <style>
+      #particles-js{
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        background-image: url('');
+        background-size: cover;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+      }
+    </style>
 </head>
 
-<body class="g-sidenav-show   bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    <main class="main-content position-relative border-radius-lg ">
-        <div class="container-fluid py-4">
-            <div class="row mt-4">
-                <div class="row mt-10">
-                    <div class="col-sm-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Selamat Datang Di Pemilihan Ketua Osis SMK Wikrama 1 Garut 2024</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Pilih Sekarang!</h5>
-                          <a href="{{ route('register') }}" class="btn btn-primary">Klik Disini!</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            </div>
+<body>
+
+  <div id="particles-js">
+    <div class="container-fluid" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+      <div class="row">
+        <div class="col-6">
+          <div class="d-flex align-items-center h-100">
+            <h1 class="text-light fw-bold">Selamat Datang Di Pemilihan Ketua Osis SMK Wikrama 1 Garut 2024</h1>
+          </div>
         </div>
-    </main>
-    <!--   Core JS Files   -->
-    <script src="{{ asset('master/assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('master/assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('master/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('master/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('master/assets/js/plugins/chartjs.min.js') }}"></script>
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ asset('master/assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
-    <!-- Scripts for this page -->
-    @stack('scripts')
+        <div class="col-6">
+          <div class="d-flex align-items-center h-100">
+            <a href="{{ route('login') }}" class="btn bg-gradient-primary w-100">Pilih Sekarang</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    particlesJS.load('particles-js', 'js/particles.json', function() {
+      console.log('callback - particles.js config loaded');
+    });
+  })
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{{ asset('master/assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
+  <!-- Scripts for this page -->
+  @stack('scripts')
 </body>
 
 </html>
