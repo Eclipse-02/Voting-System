@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Candidate;
+use App\Models\Mission;
+use App\Models\Vision;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -18,7 +20,9 @@ class CandidateController extends Controller
     {
         $data = Candidate::with(['vision', 'mission'])->get();
 
-        return view('scaffolds.candidates.index', compact('data'));
+        return view('scaffolds.candidates.index', compact('data'))
+                ->with('m', 0)
+                ->with('n', 0);
     }
 
     /**
@@ -86,8 +90,6 @@ class CandidateController extends Controller
             'number' => 'required',
         ]);
 
-        // dd($request->all());
-
         if ($validator->fails()) {
             Alert::toast('Oops, Something Went Wrong!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
@@ -125,25 +127,57 @@ class CandidateController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function vision()
+    public function vision($candidate)
     {
-        //
+        $data = Candidate::where('id', $candidate)->first();
+        $visions = Vision::all();
+
+        return view('scaffolds.visions.index', compact('data', 'visions'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function visionStore()
+    public function visionStore(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'desc' => 'array',
+            'desc.0' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Went Wrong!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            foreach ($request->desc as $key => $value) {
+                if ($value == null) {
+                    # code...
+                } else {
+                    Vision::updateOrCreate([
+                        'candidate_id' => $request->candidate_id,
+                        'id' => $request->id
+                    ],
+                    [
+                        'vsn_sq_no' => $key + 1,
+                        'desc' => $value,
+                    ]);
+                }
+            }
+
+            Alert::toast('Data Saved Successfully!', 'success');
+            return redirect()->route('candidates.index');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function visionDestroy()
+    public function visionDestroy($candidate, Vision $vision)
     {
-        //
+        $vision->delete();
+
+        Alert::toast('Data Deleted Successfully!', 'success');
+        return redirect()->route('candidates.index');
     }
 
     /* MISSION SECTION */
@@ -151,24 +185,56 @@ class CandidateController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function mission()
+    public function mission($candidate)
     {
-        //
+        $data = Candidate::where('id', $candidate)->first();
+        $missions = Mission::all();
+
+        return view('scaffolds.missions.index', compact('data', 'missions'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function missionStore()
+    public function missionStore(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'desc' => 'array',
+            'desc.0' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Went Wrong!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            foreach ($request->desc as $key => $value) {
+                if ($value == null) {
+                    # code...
+                } else {
+                    Mission::updateOrCreate([
+                        'candidate_id' => $request->candidate_id,
+                        'id' => $request->id
+                    ],
+                    [
+                        'msn_sq_no' => $key + 1,
+                        'desc' => $value,
+                    ]);
+                }
+            }
+
+            Alert::toast('Data Saved Successfully!', 'success');
+            return redirect()->route('candidates.index');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function missionDestroy()
+    public function missionDestroy($candidate, Mission $mission)
     {
-        //
+        $mission->delete();
+
+        Alert::toast('Data Deleted Successfully!', 'success');
+        return redirect()->route('candidates.index');
     }
 }

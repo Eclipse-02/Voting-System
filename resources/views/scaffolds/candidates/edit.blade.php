@@ -3,7 +3,7 @@
 @section('content')
     <div class="card mb-4" style="height: calc(100vh - 120px)">
         <div class="card-header pb-2">
-            <h6>Candidates Table</h6>
+            <h6>Edit Candidate</h6>
         </div>
         <div class="card-body px-5 pt-2 pb-2">
             <form action="{{ route('candidates.update', $data->id) }}" method="POST" enctype="multipart/form-data">

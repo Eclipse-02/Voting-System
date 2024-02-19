@@ -26,23 +26,23 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'candidates'], function() {
+
         Route::get('/', [CandidateController::class, 'index'])->name('candidates.index');
         Route::post('/', [CandidateController::class, 'store'])->name('candidates.store');
         Route::match(['put', 'patch'],'/{candidate}', [CandidateController::class, 'update'])->name('candidates.update');
         Route::delete('/{candidate}', [CandidateController::class, 'destroy'])->name('candidates.destroy');
         Route::get('/{candidate}/edit', [CandidateController::class, 'edit'])->name('candidates.edit');
 
-        Route::group(['prefix' => 'visions'], function() {
-            Route::get('/', [CandidateController::class, 'vision'])->name('visions.index');
-            Route::post('/', [CandidateController::class, 'visionStore'])->name('visions.store');
-            Route::delete('/{vision}', [CandidateController::class, 'visionDestroy'])->name('visions.destroy');
-        });
+        // visions route
+        Route::get('/{candidate}/visions', [CandidateController::class, 'vision'])->name('visions.index');
+        Route::post('/{candidate}/visions', [CandidateController::class, 'visionStore'])->name('visions.store');
+        Route::delete('/{candidate}/visions/{vision}', [CandidateController::class, 'visionDestroy'])->name('visions.destroy');
 
-        Route::group(['prefix' => 'missions'], function() {
-            Route::get('/', [CandidateController::class, 'mission'])->name('missions.index');
-            Route::post('/', [CandidateController::class, 'missionStore'])->name('missions.store');
-            Route::delete('/{mission}', [CandidateController::class, 'missionDestroy'])->name('missions.destroy');
-        });
+        // missions route
+        Route::get('/{candidate}/missions', [CandidateController::class, 'mission'])->name('missions.index');
+        Route::post('/{candidate}/missions', [CandidateController::class, 'missionStore'])->name('missions.store');
+        Route::delete('/{candidate}/missions/{mission}', [CandidateController::class, 'missionDestroy'])->name('missions.destroy');
+
     });
 
 });
